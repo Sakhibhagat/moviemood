@@ -324,7 +324,10 @@
   function buildDiscoverUrl(langCode, opts){
     const p = new URLSearchParams();
     p.set('api_key', TMDB_API_KEY);
-    p.set('language', LOCALE_FOR[Object.keys(LANG_CODES).find(k => LANG_CODES[k]===langCode)] || 'en-US');
+    // Always request English metadata (title/overview) for display, even
+    // though with_original_language below still filters by the film's
+    // actual production language (Hindi, Gujarati, etc).
+    p.set('language', 'en-US');
     p.set('with_original_language', langCode);
     p.set('include_adult', 'false');
     p.set('sort_by', opts.sortBy || 'popularity.desc');
@@ -349,8 +352,8 @@
 
   async function fetchDetails(id, langCode){
     try {
-      const locale = LOCALE_FOR[Object.keys(LANG_CODES).find(k => LANG_CODES[k]===langCode)] || 'en-US';
-      const res = await fetch(TMDB_BASE + '/movie/' + id + '?api_key=' + TMDB_API_KEY + '&language=' + locale);
+      // Same reasoning as above — keep detail metadata in English too.
+      const res = await fetch(TMDB_BASE + '/movie/' + id + '?api_key=' + TMDB_API_KEY + '&language=en-US');
       if (!res.ok) return null;
       return await res.json();
     } catch(e){ return null; }
