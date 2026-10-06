@@ -2,7 +2,7 @@
 
 Tell it your mood, not a genre checklist — get back one movie, picked for tonight.
 
-**Repo:** https://github.com/Sakhibhagat/moviemood
+### 🔴 [Try it live](https://coruscating-semolina-687fe8.netlify.app)
 
 ![MovieMood screenshot](screenshot.png)
 <!-- Add a real screenshot.png to this folder before pushing, or this line will show a broken image. -->
@@ -19,6 +19,7 @@ It's also intentionally not Hollywood-only. The catalog spans English, Hindi, an
 - **Optional filters** — language (English / Hindi / Gujarati / Any), genre, era, minimum rating, runtime (including a quick "under 90 minutes" toggle)
 - **Single-pick reveal** — a "Tonight's Pick" card with rating, runtime, tags, and an editorial-style tagline, instead of a generic top-5 list
 - **Live data** — pulls from [The Movie Database (TMDB)](https://www.themoviedb.org/) API in real time, so the catalog is the actual, current set of released films — not a fixed list that runs out
+- **English titles always** — even for Hindi/Gujarati films, titles and summaries display in English (e.g. "PK", not "पीके") for a consistent reading experience
 - **🎲 Surprise Me** — re-rolls to a different strong match without restarting the flow
 - **❤️ Save** — persists to `localStorage`, so saved picks survive a reload
 - **↗ Share** — uses the Web Share API on mobile, falls back to clipboard copy on desktop
@@ -32,7 +33,7 @@ Each of the 9 moods maps to a genre bias (e.g. *Scary → Horror*, *Mystery/Thri
 2. Any active filters (genre, era, minimum rating, runtime) are applied as query parameters.
 3. If a strict combination returns nothing, the app progressively relaxes the least essential filters (runtime → rating → era → genre) and retries, so an unusual combination never dead-ends into a blank screen.
 4. From the results, the app leans toward higher-rated matches while keeping some randomness, so repeated requests for the same mood don't always surface the identical film.
-5. Once a pick is chosen, a second call fetches its runtime (not included in the discovery results) to complete the reveal card.
+5. Once a pick is chosen, a second call fetches its runtime (not included in the discovery results) to complete the reveal card, with metadata always requested in English regardless of the film's original language.
 
 ## Tech stack
 
@@ -40,6 +41,7 @@ Each of the 9 moods maps to a genre bias (e.g. *Scary → Horror*, *Mystery/Thri
 - Plain CSS (no Tailwind/build step)
 - [TMDB API](https://developer.themoviedb.org/reference/intro/getting-started) for live movie data
 - `localStorage` for saved-picks persistence
+- Hosted on [Netlify](https://www.netlify.com/)
 
 ## Setup
 
