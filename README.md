@@ -4,8 +4,7 @@ Tell it your mood, not a genre checklist — get back one movie, picked for toni
 
 ### 🔴 [Try it live](https://coruscating-semolina-687fe8.netlify.app)
 
-![MovieMood screenshot](screenshot.png)
-<!-- Add a real screenshot.png to this folder before pushing, or this line will show a broken image. -->
+![MovieMood screenshot](ss-moviemood.png)
 
 ## Why
 
